@@ -18,6 +18,9 @@ async def post(name:str, age: int, id:int):
     session.commit()
     return ad.nome
 
+@app.get('/{id}')
+async def getid(id: int):
+    return session.query(User).get(id)
 
 
 if __name__ == '__main__':
