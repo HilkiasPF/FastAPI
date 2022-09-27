@@ -1,10 +1,23 @@
 from fastapi import FastAPI
+from model import ContasModels
+from database import User, engine
+from sqlalchemy.orm import sessionmaker
 
 app = FastAPI()
 
+Session = sessionmaker(bind=engine)
+session = Session()
+
 @app.get('/')
 async def list():
-    return '123'
+    return session.query(User).all()
+
+@app.post('/')
+async def poste(name:str, age: int, id:int):
+    ad = User(nome=name, age=age, id=id)
+    session.add(ad)
+    session.commit()
+    return ad.nome
 
 
 
