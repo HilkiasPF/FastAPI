@@ -11,16 +11,16 @@ session = Session()
 async def list():
     return session.query(User).all()
 
-@app.post('/')
-async def post(name:str, age: int, id:int):
-    ad = User(nome=name, age=age, id=id)
-    session.add(ad)
-    session.commit()
-    return ad.nome
-
 @app.get('/{id}')
 async def getid(id: int):
     return session.query(User).get(id)
+
+@app.post('/')
+async def post(name:str, age: int):
+    ad = User(nome=name, age=age)
+    session.add(ad)
+    session.commit()
+    return ad.nome
 
 @app.delete('/del/{id}')
 async def delid(id:int):
