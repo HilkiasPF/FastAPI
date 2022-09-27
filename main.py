@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from model import ContasModels
 from database import User, engine
 from sqlalchemy.orm import sessionmaker
 
@@ -13,7 +12,7 @@ async def list():
     return session.query(User).all()
 
 @app.post('/')
-async def poste(name:str, age: int, id:int):
+async def post(name:str, age: int, id:int):
     ad = User(nome=name, age=age, id=id)
     session.add(ad)
     session.commit()
