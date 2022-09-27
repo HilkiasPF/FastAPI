@@ -22,6 +22,13 @@ async def post(name:str, age: int, id:int):
 async def getid(id: int):
     return session.query(User).get(id)
 
+@app.delete('/del/{id}')
+async def delid(id:int):
+    n = session.query(User).get(id)
+    session.delete(n)
+    session.commit()
+    session.close()
+    return 'deleted'
 
 if __name__ == '__main__':
     import uvicorn
